@@ -3,12 +3,17 @@ import { useForm } from 'react-hook-form';
 import { Alert, Keyboard, Modal, TouchableWithoutFeedback } from 'react-native';
 import { CategorySelectButton } from '../../components/CategorySelectButton';
 import { Button } from '../../components/Forms/Button';
-import { Fields } from '../../components/Forms/Button/styles';
-import { Input } from '../../components/Forms/Input/Input';
 import { InputForm } from '../../components/InputForm';
 import { TransactionTypeButton } from '../../components/TransactionTypeButton';
 import { Category, CategorySelect } from '../CategorySelect';
-import { Container, Header, Title, Form, TransactionTypes } from './styles';
+import {
+  Container,
+  Header,
+  Title,
+  Form,
+  TransactionsTypes,
+  Fields,
+} from './styles';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -94,7 +99,7 @@ export function Register() {
               keyboardType='numeric'
               error={errors.amount && errors.amount.message}
             />
-            <TransactionTypes>
+            <TransactionsTypes>
               <TransactionTypeButton
                 title='Income'
                 type='up'
@@ -107,7 +112,7 @@ export function Register() {
                 isActive={transactionType === 'down'}
                 onPress={() => handleTransactionsTypeSelect('down')}
               />
-            </TransactionTypes>
+            </TransactionsTypes>
             <CategorySelectButton
               title={category.name}
               onPress={handleOpenSelectCategoryModal}

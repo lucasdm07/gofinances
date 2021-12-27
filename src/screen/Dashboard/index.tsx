@@ -1,9 +1,9 @@
-import React from "react";
-import { HighlightCard } from "../../components/HighlightCard";
+import React from 'react';
+import { HighlightCard } from '../../components/HighlightCard';
 import {
   TransactionCard,
   TransactionCardProps,
-} from "../../components/TransactionCard";
+} from '../../components/TransactionCard';
 
 import {
   Container,
@@ -19,7 +19,8 @@ import {
   Transactions,
   Title,
   TransactionList,
-} from "./styles";
+  LogoutButton,
+} from './styles';
 
 export interface DataListProps extends TransactionCardProps {
   id: string;
@@ -28,28 +29,28 @@ export interface DataListProps extends TransactionCardProps {
 export function Dashboard() {
   const data: DataListProps[] = [
     {
-      id: "1",
-      type: "positive",
-      title: "Desenvolvimento de Site",
-      amount: "RS 12.000,00",
-      date: "13/04/2020",
-      category: { name: "Vendas", icon: "dollar-sign" },
+      id: '1',
+      type: 'positive',
+      title: 'Desenvolvimento de Site',
+      amount: 'RS 12.000,00',
+      date: '13/04/2020',
+      category: { name: 'Vendas', icon: 'dollar-sign' },
     },
     {
-      id: "2",
-      type: "negative",
-      title: "Hamburgueria Pizzy",
-      amount: "RS 59,00",
-      date: "13/04/2020",
-      category: { name: "Alimentação", icon: "coffee" },
+      id: '2',
+      type: 'negative',
+      title: 'Hamburgueria Pizzy',
+      amount: 'RS 59,00',
+      date: '13/04/2020',
+      category: { name: 'Alimentação', icon: 'coffee' },
     },
     {
-      id: "3",
-      type: "positive",
-      title: "Aluguel do Apartamento",
-      amount: "RS 1.200,00",
-      date: "13/04/2020",
-      category: { name: "Casa", icon: "shopping-bag" },
+      id: '3',
+      type: 'positive',
+      title: 'Aluguel do Apartamento',
+      amount: 'RS 1.200,00',
+      date: '13/04/2020',
+      category: { name: 'Casa', icon: 'shopping-bag' },
     },
   ];
 
@@ -60,7 +61,7 @@ export function Dashboard() {
           <UserInfo>
             <Photo
               source={{
-                uri: "https://avatars.githubusercontent.com/u/44589860?v=4",
+                uri: 'https://avatars.githubusercontent.com/u/44589860?v=4',
               }}
             />
             <User>
@@ -68,27 +69,29 @@ export function Dashboard() {
               <UserName>Lucas</UserName>
             </User>
           </UserInfo>
-          <Icon name="power" />
+          <LogoutButton onPress={() => {}}>
+            <Icon name='power' />
+          </LogoutButton>
         </UserWrapper>
       </Header>
       <HighlightCards>
         <HighlightCard
-          type={"up"}
-          title={"Entradas"}
-          amount={"R$ 17.400,00"}
-          lastTransaction={"Última entrada dia 13 de abril"}
+          type={'up'}
+          title={'Entradas'}
+          amount={'R$ 17.400,00'}
+          lastTransaction={'Última entrada dia 13 de abril'}
         />
         <HighlightCard
-          type={"down"}
-          title={"Entradas"}
-          amount={"R$ 1.259,00"}
-          lastTransaction={"Última saída dia 03 de abril"}
+          type={'down'}
+          title={'Entradas'}
+          amount={'R$ 1.259,00'}
+          lastTransaction={'Última saída dia 03 de abril'}
         />
         <HighlightCard
-          type={"total"}
-          title={"total"}
-          amount={"R$ 16.141,00"}
-          lastTransaction={"01 à 16 de abril"}
+          type={'total'}
+          title={'total'}
+          amount={'R$ 16.141,00'}
+          lastTransaction={'01 à 16 de abril'}
         />
       </HighlightCards>
       <Transactions>
