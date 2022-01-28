@@ -24,6 +24,7 @@ import {
   ParamListBase,
   useNavigation,
 } from '@react-navigation/native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 interface FormData {
   name: string;
@@ -61,15 +62,17 @@ export function Register() {
     setTransactionType(type);
   };
 
-  const handleCloseSelectCategoryModal = () => {
-    setCategoryModalOpen(false);
-  };
-
   const handleOpenSelectCategoryModal = () => {
     setCategoryModalOpen(true);
   };
 
+  const handleCloseSelectCategoryModal = () => {
+    console.log('handleCloseSelectCategoryModal');
+    setCategoryModalOpen(false);
+  };
+
   const handleSetCategory = (item: Category) => {
+    console.log(`item: ${item}`);
     setCategory(item);
   };
   const dataKey = '@gofinances:transactions';
@@ -153,11 +156,13 @@ export function Register() {
         </Form>
 
         <Modal visible={categoryModalOpen}>
-          <CategorySelect
-            category={category}
-            setCategory={handleSetCategory}
-            closeSelectCategory={handleCloseSelectCategoryModal}
-          />
+          <GestureHandlerRootView style={{ width: '100%', height: '100%' }}>
+            <CategorySelect
+              category={category}
+              setCategory={handleSetCategory}
+              closeSelectCategory={handleCloseSelectCategoryModal}
+            />
+          </GestureHandlerRootView>
         </Modal>
       </Container>
     </TouchableWithoutFeedback>

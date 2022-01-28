@@ -26,11 +26,15 @@ interface Props {
 
 export function CategorySelect({
   category,
-  closeSelectCategory,
   setCategory,
+  closeSelectCategory,
 }: Props) {
   const handleCategorySelect = (category: Category) => {
     setCategory(category);
+  };
+  const handleCloseSelectCategory = () => {
+    console.log('handleCloseSelectCategory');
+    closeSelectCategory();
   };
 
   return (
@@ -54,7 +58,10 @@ export function CategorySelect({
         ItemSeparatorComponent={() => <Separator />}
       />
       <Footer>
-        <Button title={'Selecionar'} onPress={closeSelectCategory} />
+        <Button
+          title={'Selecionar'}
+          onPress={() => handleCloseSelectCategory()}
+        />
       </Footer>
     </Container>
   );
