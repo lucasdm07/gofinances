@@ -7,6 +7,7 @@ import { Register } from '../screen/Register';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const { Navigator, Screen } = createBottomTabNavigator();
+
 export function AppRoutes() {
   const theme = useTheme();
   return (

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { HighlightCard } from '../../components/HighlightCard';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   TransactionCard,
   TransactionCardProps,
@@ -22,37 +23,67 @@ import {
   LogoutButton,
 } from './styles';
 
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
+import { useFocusEffect } from '@react-navigation/native';
+
 export interface DataListProps extends TransactionCardProps {
   id: string;
 }
 
 export function Dashboard() {
-  const data: DataListProps[] = [
-    {
-      id: '1',
-      type: 'positive',
-      title: 'Desenvolvimento de Site',
-      amount: 'RS 12.000,00',
-      date: '13/04/2020',
-      category: { name: 'Vendas', icon: 'dollar-sign' },
-    },
-    {
-      id: '2',
-      type: 'negative',
-      title: 'Hamburgueria Pizzy',
-      amount: 'RS 59,00',
-      date: '13/04/2020',
-      category: { name: 'Alimentação', icon: 'coffee' },
-    },
-    {
-      id: '3',
-      type: 'positive',
-      title: 'Aluguel do Apartamento',
-      amount: 'RS 1.200,00',
-      date: '13/04/2020',
-      category: { name: 'Casa', icon: 'shopping-bag' },
-    },
-  ];
+  const [data, setData] = useState<DataListProps[]>([]);
+
+  async function loadTransactions() {
+    const dataKey = '@gofinances:transactions';
+    const response = await AsyncStorage.getItem(dataKey);
+    const transactions = response ? JSON.parse(response) : [];
+
+    const transactionsFormated: DataListProps[] = transactions.map(
+      (item: DataListProps) => {
+        const amount = Number(item.amount).toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+        });
+
+        const date = Intl.DateTimeFormat('pt-BR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: '2-digit',
+        }).format(new Date(item.date));
+
+        return {
+          id: item.id,
+          name: item.name,
+          amount,
+          type: item.type,
+          category: item.category,
+          date,
+        };
+      }
+    );
+
+    setData(transactionsFormated);
+  }
+
+  // useEffect(() => {
+  //   async function removeAll() {
+  //     const dataKey = '@gofinances:transactions';
+  //     const data = await AsyncStorage.removeItem(dataKey);
+  //     console.log('lista limpa');
+  //   }
+  //   removeAll();
+  // }, []);
+
+  useEffect(() => {
+    loadTransactions();
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadTransactions();
+    }, [])
+  );
 
   return (
     <Container>

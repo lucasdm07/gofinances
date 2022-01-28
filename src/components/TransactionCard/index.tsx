@@ -1,5 +1,6 @@
-import React from "react";
-import { View } from "react-native";
+import React from 'react';
+import { View } from 'react-native';
+import { categories } from '../../utils/categories';
 import {
   Amount,
   Category,
@@ -9,18 +10,13 @@ import {
   Icon,
   Title,
   Date,
-} from "./style";
-
-interface CategoryProps {
-  name: string;
-  icon: string;
-}
+} from './style';
 
 export interface TransactionCardProps {
-  type: "positive" | "negative";
-  title: string;
+  type: 'positive' | 'negative';
+  name: string;
   amount: string;
-  category: CategoryProps;
+  category: string;
   date: string;
 }
 
@@ -29,23 +25,24 @@ interface Props {
 }
 
 const icon = {
-  up: "arrow-up-circle",
-  down: "arrow-down-circle",
-  total: "dollar-sign",
+  up: 'arrow-up-circle',
+  down: 'arrow-down-circle',
+  total: 'dollar-sign',
 };
 
 export function TransactionCard({ data }: Props) {
+  const category = categories.filter((item) => item.key === data.category)[0];
   return (
     <Container>
-      <Title>{data.title}</Title>
+      <Title>{data.name}</Title>
       <Amount type={data.type}>
-        {data.type === "negative" && "- "}
+        {data.type === 'negative' && '- '}
         {data.amount}
       </Amount>
       <Footer>
         <Category>
-          <Icon name={data.category.icon} />
-          <CategoryName>{data.category.name}</CategoryName>
+          <Icon name={category.icon} />
+          <CategoryName>{category.name}</CategoryName>
         </Category>
         <Date>{data.date}</Date>
       </Footer>
