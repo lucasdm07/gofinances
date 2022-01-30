@@ -26,9 +26,13 @@ import {
 } from '@react-navigation/native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-interface FormData {
+interface FormDataProp {
   name: string;
   amount: string;
+}
+
+interface FormData {
+  [index: string]: FormDataProp;
 }
 
 const schema = Yup.object().shape({
@@ -67,12 +71,10 @@ export function Register() {
   };
 
   const handleCloseSelectCategoryModal = () => {
-    console.log('handleCloseSelectCategoryModal');
     setCategoryModalOpen(false);
   };
 
   const handleSetCategory = (item: Category) => {
-    console.log(`item: ${item}`);
     setCategory(item);
   };
   const dataKey = '@gofinances:transactions';
@@ -156,7 +158,7 @@ export function Register() {
         </Form>
 
         <Modal visible={categoryModalOpen}>
-          <GestureHandlerRootView style={{ width: '100%', height: '100%' }}>
+          <GestureHandlerRootView style={{ flex: 1 }}>
             <CategorySelect
               category={category}
               setCategory={handleSetCategory}

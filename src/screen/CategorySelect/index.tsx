@@ -33,7 +33,6 @@ export function CategorySelect({
     setCategory(category);
   };
   const handleCloseSelectCategory = () => {
-    console.log('handleCloseSelectCategory');
     closeSelectCategory();
   };
 
