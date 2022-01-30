@@ -12,6 +12,7 @@ import { ThemeProvider } from 'styled-components/native';
 import theme from './src/global/styles/theme';
 import { AppRoutes } from './src/routes/app.routes';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { StatusBar } from 'react-native';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -27,6 +28,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider theme={theme}>
+        <StatusBar barStyle={'light-content'} />
         <NavigationContainer>
           <AppRoutes />
         </NavigationContainer>
